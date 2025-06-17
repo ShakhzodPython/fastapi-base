@@ -41,7 +41,7 @@ class DatabaseHelper:
             yield session
 
 
-db = DatabaseHelper(
+db_helper = DatabaseHelper(
     url=str(settings.db.url),
     echo=settings.db.echo,
     echo_pool=settings.db.echo_pool,
