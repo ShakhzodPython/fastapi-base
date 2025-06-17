@@ -14,8 +14,14 @@ class RunConfig(BaseModel):
     port: int = 8000
 
 
+class APIV1Prefix(BaseModel):
+    prefix: str = "/v1"
+    users: str = "/users"
+
+
 class APIPrefix(BaseModel):
     prefix: str = "/api"
+    v1: APIV1Prefix = APIV1Prefix()
 
 
 class DatabaseConfig(BaseModel):
