@@ -1,6 +1,12 @@
+from pathlib import Path
+
 from pydantic import BaseModel, PostgresDsn
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
+ENV_TEMPLATE_PATH = Path(__file__).resolve().parents[1] / ".env.template"
 
 
 class RunConfig(BaseModel):
@@ -21,9 +27,17 @@ class DatabaseConfig(BaseModel):
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_file=(str(ENV_TEMPLATE_PATH), str(ENV_PATH,)),
+        case_sensitive=False,
+        env_nested_delimiter="__",
+        env_prefix="APP_CONFIG__",
+    )
     run: RunConfig = RunConfig()
     api: APIPrefix = APIPrefix()
     db: DatabaseConfig
 
 
 settings = Settings()
+print(settings.db.url)
+print(settings.db.echo)
