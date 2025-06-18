@@ -10,7 +10,7 @@ from core.schemas.user import UserRead, UserCreate
 router = APIRouter(tags=["Users"])
 
 
-@router.get("", response_model=list[UserRead])
+@router.get("", response_model=list[UserRead], include_in_schema=False)
 async def get_users(
     session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
 ):
@@ -18,7 +18,7 @@ async def get_users(
     return users
 
 
-@router.post("/create", response_model=UserRead)
+@router.post("/create", response_model=UserRead, include_in_schema=False)
 async def create_user(
     session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
     user_create: UserCreate,
@@ -28,3 +28,6 @@ async def create_user(
         user_create=user_create,
     )
     return user
+
+
+# Router for auth user through fastapi-users

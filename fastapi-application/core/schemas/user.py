@@ -25,7 +25,7 @@ from core.types.user_id import UserIdType
 
 
 # Schema for fastapi-users
-class UserRead(schemas.BaseModel[UserIdType]):
+class UserRead(schemas.BaseUser[UserIdType]):
     pass
 
 
@@ -35,3 +35,4 @@ class UserCreate(schemas.BaseUserCreate):
 
 class UserUpdate(schemas.BaseUserUpdate):
     pass
+
