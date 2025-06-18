@@ -1,6 +1,5 @@
 from typing import TYPE_CHECKING
 
-from fastapi import Depends
 from fastapi_users_db_sqlalchemy.access_token import (
     SQLAlchemyBaseAccessTokenTable,
     SQLAlchemyAccessTokenDatabase,
