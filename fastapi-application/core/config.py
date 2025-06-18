@@ -23,7 +23,8 @@ class APIPrefix(BaseModel):
 # Config for fastapi-users
 class AccessToken(BaseModel):
     lifetime_seconds: int = 3600
-
+    reset_password_secret: str
+    verification_token_secret: str
 
 class DatabaseConfig(BaseModel):
     url: PostgresDsn
@@ -51,7 +52,6 @@ class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     api: APIPrefix = APIPrefix()
     db: DatabaseConfig
-    access_token: AccessToken = AccessToken()
-
+    access_token: AccessToken
 
 settings = Settings()
