@@ -40,4 +40,4 @@ class User(
         cls,
         session: "AsyncSession",
     ):
-        return SQLAlchemyUserDatabase(session, User)
+        return SQLAlchemyUserDatabase(session, cls)
