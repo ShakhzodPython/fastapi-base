@@ -34,11 +34,10 @@ class User(
     PKMixin,
     SQLAlchemyBaseUserTable[UserIdType],
 ):
-    pass
 
     @classmethod
     def get_db(
         cls,
-        session: AsyncSession,
+        session: "AsyncSession",
     ):
         return SQLAlchemyUserDatabase(session, User)
