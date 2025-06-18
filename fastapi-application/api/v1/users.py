@@ -3,6 +3,9 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from api.dependecies.authentication.backend import authentication_backend
+from api.dependecies.authentication.fastapi_users import fastapi_users
+
 from core.crud import users as users_crud
 from core.models import db_helper
 from core.schemas.user import UserRead, UserCreate
@@ -31,3 +34,7 @@ async def create_user(
 
 
 # Router for auth user through fastapi-users
+router.include_router(
+    router=fastapi_users.get_auth_router(backend=authentication_backend),
+    prefix="/auth/jwt/",
+)
