@@ -33,7 +33,18 @@ async def create_user(
     return user
 
 
-# Router for auth user through fastapi-users
+# Router for login/logout user through fastapi-users
 router.include_router(
-    router=fastapi_users.get_auth_router(backend=authentication_backend),
+    router=fastapi_users.get_auth_router(
+        backend=authentication_backend,
+    ),
+)
+
+
+# Router for register user through fastapi-users
+router.include_router(
+    router=fastapi_users.get_register_router(
+        UserRead,
+        UserCreate,
+    ),
 )
