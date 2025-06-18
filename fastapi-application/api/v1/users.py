@@ -36,5 +36,4 @@ async def create_user(
 # Router for auth user through fastapi-users
 router.include_router(
     router=fastapi_users.get_auth_router(backend=authentication_backend),
-    prefix="/auth/jwt/",
 )
