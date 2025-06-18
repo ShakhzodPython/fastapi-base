@@ -19,6 +19,13 @@ class APIPrefix(BaseModel):
     prefix: str = "/api"
     v1: APIV1Prefix = APIV1Prefix()
 
+    @property
+    def bearer_token_url(self) -> str:
+        """Bearer token url for fastapi-users"""
+        # api/v1/users/auth/jwt/login
+        parts = (self.prefix, self.v1.prefix, self.v1.users, "/auth/jwt/login")
+        path = "".join(parts)
+        return path.removeprefix("/")
 
 # Config for fastapi-users
 class AccessToken(BaseModel):
