@@ -1,4 +1,7 @@
-from fastapi_users.db import SQLAlchemyBaseUserTable
+from typing import TYPE_CHECKING
+
+from fastapi_users.db import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
+
 
 # from sqlalchemy import UniqueConstraint
 # from sqlalchemy.orm import Mapped, mapped_column
@@ -21,6 +24,21 @@ from .mixins.pk import PKMixin
 #     )
 
 
+if TYPE_CHECKING:
+    from sqlalchemy.ext.asyncio import AsyncSession
+
+
 # Example with fastapi-users
-class User(Base, PKMixin, SQLAlchemyBaseUserTable[int]):
+class User(
+    Base,
+    PKMixin,
+    SQLAlchemyBaseUserTable[int],
+):
     pass
+
+    @classmethod
+    def get_db(
+        cls,
+        session: AsyncSession,
+    ):
+        return SQLAlchemyUserDatabase(session, User)
