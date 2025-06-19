@@ -9,11 +9,11 @@ router = APIRouter(
 )
 
 router.include_router(
-    users_router,
-    prefix=settings.api.v1.users,
+    auth_router,
+    prefix=settings.api.v1.auth,
 )
 
-auth_router.include_router(
-    auth_router,
-    prefix=settings.api.v1.auth
+router.include_router(
+    users_router,
+    prefix=settings.api.v1.users,
 )
