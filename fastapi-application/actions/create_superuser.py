@@ -1,6 +1,6 @@
+import os
 import asyncio
 import contextlib
-from os import getenv
 
 from api.dependecies.authentication.manager import get_user_manager
 from api.dependecies.authentication.users import get_users_db
@@ -12,8 +12,8 @@ from core.schemas.user import UserCreate
 get_users_db_context = contextlib.asynccontextmanager(get_users_db)
 get_user_manager_context = contextlib.asynccontextmanager(get_user_manager)
 
-default_email = getenv("DEFAULT_EMAIL", "admin@admin.com")
-default_password = getenv("DEFAULT_PASSWORD", "abc")
+default_email = os.getenv("DEFAULT_EMAIL", "admin@admin.com")
+default_password = os.getenv("DEFAULT_PASSWORD", "abc")
 default_is_active = True
 default_is_superuser = True
 default_is_verified = True
