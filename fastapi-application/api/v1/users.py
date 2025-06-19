@@ -1,6 +1,7 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
+from fastapi.security import HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.dependecies.authentication.backend import authentication_backend
@@ -10,7 +11,9 @@ from core.crud import users as users_crud
 from core.models import db_helper
 from core.schemas.user import UserRead, UserCreate, UserUpdate
 
-router = APIRouter(tags=["Users"])
+http_bearer = HTTPBearer(auto_error=False)
+
+router = APIRouter(tags=["Users"], dependencies=[Depends(http_bearer)])
 
 
 @router.get("", response_model=list[UserRead], include_in_schema=False)
