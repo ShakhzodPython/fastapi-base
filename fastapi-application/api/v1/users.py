@@ -8,7 +8,7 @@ from api.dependecies.authentication.fastapi_users import fastapi_users
 
 from core.crud import users as users_crud
 from core.models import db_helper
-from core.schemas.user import UserRead, UserCreate
+from core.schemas.user import UserRead, UserCreate, UserUpdate
 
 router = APIRouter(tags=["Users"])
 
@@ -47,4 +47,12 @@ router.include_router(
         UserRead,
         UserCreate,
     ),
+)
+
+# Router for crud user
+router.include_router(
+    router=fastapi_users.get_users_router(
+        UserRead,
+        UserUpdate,
+    )
 )

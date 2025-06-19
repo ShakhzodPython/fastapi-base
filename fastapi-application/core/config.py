@@ -23,7 +23,7 @@ class APIPrefix(BaseModel):
     def bearer_token_url(self) -> str:
         """Bearer token url for fastapi-users"""
         # api/v1/users/auth/jwt/login
-        parts = (self.prefix, self.v1.prefix, self.v1.users, "/auth/jwt/login")
+        parts = (self.prefix, self.v1.prefix, self.v1.users, "/login")
         path = "".join(parts)
         return path.removeprefix("/")
 
