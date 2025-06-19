@@ -7,6 +7,8 @@ from api.dependecies.authentication.manager import get_user_manager
 from api.dependecies.authentication.backend import authentication_backend
 
 fastapi_users = FastAPIUsers[User, UserIdType](
-    get_user_manager,
-    [authentication_backend]
+    get_user_manager, [authentication_backend]
 )
+
+current_user = fastapi_users.current_user(active=True)
+current_superuser = fastapi_users.current_user(active=True, superuser=True)
