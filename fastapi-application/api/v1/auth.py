@@ -11,6 +11,7 @@ router = APIRouter(tags=["Auth"])
 router.include_router(
     router=fastapi_users.get_auth_router(
         backend=authentication_backend,
+        requires_verification=True # for login user have to verify email
     ),
 )
 
@@ -21,6 +22,7 @@ router.include_router(
         UserRead,
         UserCreate,
     ),
+
 )
 
 # Router for verify token and email
