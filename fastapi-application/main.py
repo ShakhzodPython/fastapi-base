@@ -1,9 +1,14 @@
+import logging
+
 import uvicorn
 
 from core.config import settings
 from api import router as api_router
 from create_fastapi_app import create_app
 
+logging.basicConfig(
+    format=settings.logging.log_format
+)
 
 main_app = create_app(
     create_custom_static_urls=True,

@@ -15,3 +15,4 @@ asyncpg = "^0.30.0"
 alembic = "^1.16.2"
 orjson = "^3.10.18"
 fastapi-users = {extras = ["sqlalchemy"], version = "^14.0.1"}
+gunicorn = "^23.0.0"

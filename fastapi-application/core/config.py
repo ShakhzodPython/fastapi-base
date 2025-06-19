@@ -1,3 +1,5 @@
+from typing import Literal
+
 from dotenv import load_dotenv, find_dotenv
 from pydantic import BaseModel, PostgresDsn
 
@@ -5,9 +7,32 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 load_dotenv(find_dotenv())
 
+LOG_DEFAULT_FORMAT = (
+    "[%(asctime)s.%(msecs)03d] %(module)10s:%(lineno)-3d %(levelname)-7s - %(message)s"
+)
+
+
 class RunConfig(BaseModel):
     host: str = "0.0.0.0"
     port: int = 8000
+
+
+class GunicornConfig(BaseModel):
+    host: str = "0.0.0.0"
+    port: int = 8000
+    workers: int = 1
+    timeout: int = 900
+
+
+class LoggingConfig(BaseModel):
+    log_level: Literal[
+        "debug",
+        "info",
+        "warning",
+        "error",
+        "critical",
+    ] = "info"
+    log_format: str = LOG_DEFAULT_FORMAT
 
 
 class APIV1Prefix(BaseModel):
@@ -15,6 +40,7 @@ class APIV1Prefix(BaseModel):
     users: str = "/users"
     auth: str = "/auth"
     messages: str = "/messages"
+
 
 class APIPrefix(BaseModel):
     prefix: str = "/api"
@@ -60,8 +86,11 @@ class Settings(BaseSettings):
         env_prefix="APP_CONFIG__",
     )
     run: RunConfig = RunConfig()
+    gunicorn: GunicornConfig = GunicornConfig()
+    logging: LoggingConfig = LoggingConfig()
     api: APIPrefix = APIPrefix()
     db: DatabaseConfig
     access_token: AccessToken
+
 
 settings = Settings()
