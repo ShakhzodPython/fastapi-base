@@ -7,7 +7,7 @@ from fastapi_users.authentication.strategy import (
 )
 
 from core.config import settings
-from api.dependecies.authentication.access_tokens import get_access_tokens_db
+from api.dependecies.authentication import get_access_tokens_db
 
 if TYPE_CHECKING:
     from core.models import AccessToken

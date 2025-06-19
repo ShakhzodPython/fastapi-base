@@ -2,8 +2,10 @@ import os
 import asyncio
 import contextlib
 
-from api.dependecies.authentication.manager import get_user_manager
-from api.dependecies.authentication.users import get_users_db
+from api.dependecies.authentication import (
+    get_user_manager,
+    get_users_db,
+)
 
 from core.authentication.manager import UserManager
 from core.models import db_helper
