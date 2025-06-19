@@ -8,7 +8,7 @@ from sqlalchemy import Integer, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base
-from core.types.user_id import UserIdType
+from core.shared_types.user_id import UserIdType
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession

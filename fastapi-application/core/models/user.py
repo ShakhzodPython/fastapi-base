@@ -11,7 +11,7 @@ from fastapi_users_db_sqlalchemy import (
 
 from .base import Base
 from .mixins.pk import PKMixin
-from core.types.user_id import UserIdType
+from core.shared_types.user_id import UserIdType
 
 # Base example
 # class User(PKMixin, Base):

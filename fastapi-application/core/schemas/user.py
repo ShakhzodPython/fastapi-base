@@ -1,6 +1,6 @@
 from fastapi_users import schemas
 
-from core.types.user_id import UserIdType
+from core.shared_types.user_id import UserIdType
 
 
 # from pydantic import BaseModel, ConfigDict

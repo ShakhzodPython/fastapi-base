@@ -1,19 +1,16 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
-from fastapi.security import HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api.dependecies.authentication.backend import authentication_backend
-from api.dependecies.authentication.fastapi_users import fastapi_users
+from api.v1.fastapi_users import fastapi_users
 
 from core.crud import users as users_crud
 from core.models import db_helper
 from core.schemas.user import UserRead, UserCreate, UserUpdate
 
-http_bearer = HTTPBearer(auto_error=False)
 
-router = APIRouter(tags=["Users"], dependencies=[Depends(http_bearer)])
+router = APIRouter(tags=["Users"])
 
 
 @router.get("", response_model=list[UserRead], include_in_schema=False)
@@ -35,22 +32,6 @@ async def create_user(
     )
     return user
 
-
-# Router for login/logout user through fastapi-users
-router.include_router(
-    router=fastapi_users.get_auth_router(
-        backend=authentication_backend,
-    ),
-)
-
-
-# Router for register user through fastapi-users
-router.include_router(
-    router=fastapi_users.get_register_router(
-        UserRead,
-        UserCreate,
-    ),
-)
 
 # Router for crud user
 router.include_router(

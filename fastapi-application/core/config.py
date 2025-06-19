@@ -13,6 +13,7 @@ class RunConfig(BaseModel):
 class APIV1Prefix(BaseModel):
     prefix: str = "/v1"
     users: str = "/users"
+    auth: str = "/auth"
 
 
 class APIPrefix(BaseModel):
@@ -22,16 +23,18 @@ class APIPrefix(BaseModel):
     @property
     def bearer_token_url(self) -> str:
         """Bearer token url for fastapi-users"""
-        # api/v1/users/auth/jwt/login
-        parts = (self.prefix, self.v1.prefix, self.v1.users, "/login")
+        # api/v1/auth/login
+        parts = (self.prefix, self.v1.prefix, self.v1.auth, "/login")
         path = "".join(parts)
         return path.removeprefix("/")
+
 
 # Config for fastapi-users
 class AccessToken(BaseModel):
     lifetime_seconds: int = 3600
     reset_password_secret: str
     verification_token_secret: str
+
 
 class DatabaseConfig(BaseModel):
     url: PostgresDsn
